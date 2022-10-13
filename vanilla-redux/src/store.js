@@ -1,4 +1,4 @@
-import { legacy_createStore } from "redux";
+import { legacy_createStore, combineReducers } from "redux";
 
 const ADD = "ADD";
 const DELETE = "DELETE";
@@ -29,7 +29,17 @@ const reducer = (state = [], action) => {
   }
 };
 
-const store = legacy_createStore(reducer);
+const rootReducer = combineReducers({ reducer });
+
+const persistedState = localStorage.getItem("reduxState")
+  ? JSON.parse(localStorage.getItem("reduxState"))
+  : {};
+
+const store = legacy_createStore(rootReducer, persistedState);
+
+store.subscribe(() => {
+  localStorage.setItem("reduxState", JSON.stringify(store.getState()));
+});
 
 export const actionCreators = {
   addToDo,
