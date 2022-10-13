@@ -1,34 +1,35 @@
 import { legacy_createStore, combineReducers } from "redux";
+import { createAction, createReducer } from "@reduxjs/toolkit";
 
-const ADD = "ADD";
-const DELETE = "DELETE";
+const addToDo = createAction("ADD");
+const deleteToDo = createAction("DELETE");
 
-const addToDo = (text) => {
-  return {
-    type: ADD,
-    text,
-  };
-};
-const deleteToDo = (id) => {
-  return {
-    type: DELETE,
-    id: parseInt(id),
-  };
-};
+console.log(addToDo(), deleteToDo());
 
+const reducer = createReducer([], {
+  [addToDo]: (state, action) => {
+    // state를 mutate해줌. 리턴x
+    state.push({ id: Date.now(), text: action.payload });
+  },
+  [deleteToDo]: (state, action) =>
+    // state를 리턴. mutate X
+    state.filter((toDos) => toDos.id !== action.payload),
+});
+
+/*
 const reducer = (state = [], action) => {
   switch (action.type) {
-    case ADD:
-      const newToDoObj = { id: Date.now(), text: action.text };
+    case addToDo.type:
+      const newToDoObj = { id: Date.now(), text: action.payload };
       return [newToDoObj, ...state];
-    case DELETE:
-      const cleaned = state.filter((toDos) => toDos.id !== action.id);
+    case deleteToDo.type:
+      const cleaned = state.filter((toDos) => toDos.id !== action.payload);
       return cleaned;
     default:
       return state;
   }
 };
-
+*/
 const rootReducer = combineReducers({ reducer });
 
 const persistedState = localStorage.getItem("reduxState")
