@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.js": "/Vanilla_redux/static/js/main.6280bf47.js",
-    "index.html": "/Vanilla_redux/index.html",
-    "main.6280bf47.js.map": "/Vanilla_redux/static/js/main.6280bf47.js.map"
+    "main.js": "/Vanila_redux/static/js/main.6280bf47.js",
+    "index.html": "/Vanila_redux/index.html",
+    "main.6280bf47.js.map": "/Vanila_redux/static/js/main.6280bf47.js.map"
   },
   "entrypoints": [
     "static/js/main.6280bf47.js"
